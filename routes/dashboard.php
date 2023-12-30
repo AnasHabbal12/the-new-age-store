@@ -8,7 +8,7 @@ use App\Http\Controllers\Dashboard\RolesController;
 use Illuminate\Support\Facades\Route;
 // ['auth' , 'auth.type:admin,super-admin' ]   same table middleware
 // ['auth:admin' ] multi guard middleware on guard admin
-Route::group( ['middleware'=> ['auth:admin' ], 'as' => 'dashboard.', 'prefix' => 'admin/dashboard'], function() {
+Route::group( ['middleware'=> ['auth:admin,web' ], 'as' => 'dashboard.', 'prefix' => 'admin/dashboard'], function() {
 
     Route::get('prifile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('prifile', [ProfileController::class, 'update'])->name('profile.update');

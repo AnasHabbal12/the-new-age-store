@@ -31,6 +31,6 @@ return [
         'route' => 'dashboard.roles.index',
         'title' => 'Roles',
         'active' => 'dashboard.roles.*',
-        //'ability' => 'roles.view',
+        'ability' => 'roles.view',
     ],
 ];
