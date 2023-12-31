@@ -1,4 +1,6 @@
 <?php
+
+use App\Http\Controllers\Dashboard\AdminsController;
 use App\Http\Controllers\Dashboard\CategriesController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ProductsController;
@@ -26,6 +28,7 @@ Route::group( ['middleware'=> ['auth:admin,web' ], 'as' => 'dashboard.', 'prefix
         '/categories'=> CategriesController::class,
         '/products'=> ProductsController::class,
         '/roles'=> RolesController::class,
+        '/admins' => AdminsController::class,
     ]);
     //dashboard.roles.index
 });

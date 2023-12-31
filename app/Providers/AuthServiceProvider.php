@@ -34,6 +34,12 @@ class AuthServiceProvider extends ServiceProvider
 
         $abilities = $this->app->make('abilities');
 
+        Gate::before(function($user, $ability) {
+            if($user->super_admin) {
+                return true;
+            }
+        });
+
         foreach($abilities as $code => $lable) {
             Gate::define($code, function($user) use ($code) {
                 return $user->hasAbility($code);
