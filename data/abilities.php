@@ -26,5 +26,7 @@ return [
     'roles.create' => __('Create Roles'),
     'roles.update' => __('Update Roles'),
     'roles.delete' => __('Delete Roles'),
+    'roles.restore' => __('Delete Restore'),
+    'roles.force-delete' => __('Delete Force Delete'),
     ///////////////////////////////////////////
 ];

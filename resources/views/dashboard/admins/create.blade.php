@@ -11,7 +11,7 @@
 
     <form action="{{ route('dashboard.roles.store') }}" method="post" enctype="multipart/form-data">
         @csrf
-        @include('dashboard.roles._form', [
+        @include('dashboard.admins._form', [
             'btn_lbl' => 'Save'
         ])
     </form>

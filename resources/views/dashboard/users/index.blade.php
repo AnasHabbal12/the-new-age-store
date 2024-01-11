@@ -1,22 +1,22 @@
 @extends('layout.dashboard')
-@section('title','admins')
+@section('title','users')
 
 @section('breadcrumb')
 
-<li class="breadcrumb-item active">Roles</li>
+<li class="breadcrumb-item active">Users</li>
 @parent
 @endsection
 
 @section('content')
 
-    <a href="{{ route('dashboard.admins.create') }}" class="btn btn-lg btn-outline-primary">New Role</a>
+    <a href="{{ route('dashboard.users.create') }}" class="btn btn-lg btn-outline-primary">New Role</a>
 
 
     <br/><br/>
     <x-alert type="success"/>
     <x-alert type="info"/>
 
-    @if($admins -> count())
+    @if($users -> count())
 
         <table class="table">
             <thead>
@@ -25,29 +25,29 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Created At</th>
-                    @can('admins.update')
+                    @can('users.update')
                     <th></th>
                     @endcan
-                    @can('admins.delete')
+                    @can('users.delete')
                     <th></th>
                     @endcan
                 </tr>
             </thead>
             <tbody>
-                @foreach ( $admins as $admin)
+                @foreach ( $users as $user)
                     <tr>
-                        <td>{{$admin->id}}</td>
-                        <td><a href="{{route('dashboard.admins.show', $admin->id)}}">{{$admin->name}}</a></td>
-                        <td><a href="{{route('dashboard.admins.show', $admin->id)}}">{{$admin->email}}</a></td>
-                        <td>{{$admin->created_at}}</td>
+                        <td>{{$user->id}}</td>
+                        <td><a href="{{route('dashboard.users.show', $user->id)}}">{{$user->name}}</a></td>
+                        <td><a href="{{route('dashboard.users.show', $user->id)}}">{{$user->email}}</a></td>
+                        <td>{{$user->created_at}}</td>
                         @can('roles.update')
                         <td>
-                            <a href="{{ route('dashboard.admins.edit', $admin->id)}}" class="btn btn-sm btn-outline-success">Edit</a>
+                            <a href="{{ route('dashboard.users.edit', $user->id)}}" class="btn btn-sm btn-outline-success">Edit</a>
                         </td>
                         @endcan
-                        @can('admins.delete')
+                        @can('users.delete')
                         <td>
-                            <form action="{{ route('dashboard.admins.destroy', $admin->id)}}" method="post">
+                            <form action="{{ route('dashboard.users.destroy', $user->id)}}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
@@ -61,9 +61,9 @@
 
         @else
             <div class=" container">
-              <h4>There is no any Admins</h4>
+              <h4>There is no any users</h4>
             </div>
         @endif
 
-{{ $admins->withQueryString()->links() }}
+{{ $users->withQueryString()->links() }}
 @endsection

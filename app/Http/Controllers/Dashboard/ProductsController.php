@@ -16,9 +16,10 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        
+        $this->authorize('viewAny', Product::class);
+
         $products = Product::with(['category', 'store'])->paginate();
-        
+
         return view('dashboard.products.index', compact('products'));
     }
 
@@ -27,7 +28,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $this->authorize('create', Product::class);
     }
 
     /**
@@ -35,7 +36,7 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->authorize('create', Product::class);
     }
 
     /**
@@ -43,7 +44,8 @@ class ProductsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $this->authorize('view', $product);
     }
 
     /**
@@ -52,6 +54,7 @@ class ProductsController extends Controller
     public function edit(string $id)
     {
         $product = Product::findOrFail($id);
+        $this->authorize('update', $product);
         $tags = implode(',', $product->tags()->pluck('name')->toArray());
         return view('dashboard.products.edit', compact('product', 'tags'));
     }
@@ -61,9 +64,10 @@ class ProductsController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $this->authorize('update', $product);
         $product->update($request->except('tag'));
         $tags = json_decode($request->post('tag'));
-        $tags_ids = []; 
+        $tags_ids = [];
         $saved_tags = Tag::all();
         foreach( $tags as $t_name ) {
             $slug = Str::slug($t_name->value);
@@ -86,6 +90,7 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $this->authorize('delete', $product);
     }
 }

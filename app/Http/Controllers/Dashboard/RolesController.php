@@ -12,6 +12,11 @@ class RolesController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->authorizeResource(Role::class, 'role');
+    }
+
     public function index()
     {
         $roles = Role::paginate();

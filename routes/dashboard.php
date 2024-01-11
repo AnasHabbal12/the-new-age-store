@@ -6,8 +6,9 @@ use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\ProductsController;
 use App\Http\Controllers\Dashboard\ProfileController;
 use App\Http\Controllers\Dashboard\RolesController;
-
+use App\Http\Controllers\Dashboard\UsersController;
 use Illuminate\Support\Facades\Route;
+
 // ['auth' , 'auth.type:admin,super-admin' ]   same table middleware
 // ['auth:admin' ] multi guard middleware on guard admin
 Route::group( ['middleware'=> ['auth:admin,web' ], 'as' => 'dashboard.', 'prefix' => 'admin/dashboard'], function() {
@@ -29,6 +30,7 @@ Route::group( ['middleware'=> ['auth:admin,web' ], 'as' => 'dashboard.', 'prefix
         '/products'=> ProductsController::class,
         '/roles'=> RolesController::class,
         '/admins' => AdminsController::class,
+        '/users' => UsersController::class,
     ]);
     //dashboard.roles.index
 });

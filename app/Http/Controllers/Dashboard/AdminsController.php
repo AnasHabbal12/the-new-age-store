@@ -12,10 +12,16 @@ class AdminsController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function __construct()
+    {
+       // $this->authorizeResource(Admin::class, 'admin');
+    }
+
     public function index()
     {
         $admins = Admin::paginate();
-        return view('dashboard.admins.index', compact('admin'));
+        return view('dashboard.admins.index', compact('admins'));
     }
 
     /**
@@ -58,7 +64,7 @@ class AdminsController extends Controller
     public function edit(Admin $admin)
     {
         $role = Role::all();
-        $admin_roles = Admin::roles()->pluck('id')->toArray();
+        $admin_roles = $admin->roles()->pluck('id')->toArray();
         return view('dashboard.admins.edit', compact('role', 'admin_roles', 'admin'));
     }
 

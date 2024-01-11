@@ -39,11 +39,11 @@ return [
         'title' => 'Admins',
         'active' => 'dashboard.admins.*',
         'ability' => 'admins.view',
-    ], /*[
+    ], [
         'icon' => 'nav-icon fas fa-tachometer-alt',
         'route' => 'dashboard.users.index',
         'title' => 'Users',
         'active' => 'dashboard.users.*',
         'ability' => 'users.view',
-    ],*/
+    ],
 ];

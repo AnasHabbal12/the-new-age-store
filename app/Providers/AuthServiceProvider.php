@@ -14,7 +14,8 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        //
+        'App\Models\Product' => 'App\Policies\ProductPolicy',
+        'App\Models\Role' => 'App\Policies\RolePolicy',
     ];
 
     public function register()
@@ -36,7 +37,7 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::before(function($user, $ability) {
             if($user->super_admin) {
-                return true;
+             return true;
             }
         });
 

@@ -9,11 +9,11 @@
 
 @section('content')
 
-    <form action="{{ route('dashboard.roles.update', $role->id) }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('dashboard.admins.update', $admin->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method('put')
 
-        @include('dashboard.roles._form', [
+        @include('dashboard.admins._form', [
             'btn_lbl' => 'Update'
         ])
     </form>
