@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -12,6 +15,9 @@ class Handler extends ExceptionHandler
      *
      * @var array<int, string>
      */
+    protected $dontReport = [
+        QueryException::class,
+    ];
     protected $dontFlash = [
         'current_password',
         'password',
@@ -23,8 +29,27 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->reportable(function (QueryException $e) {
+
+            if($e->getCode() === '23000') {
+                Log::warning($e->getMessage());
+                return false;
+            }
+        });
+        $this->renderable(function (QueryException $e, Request $request) {
+            if($e->getCode() == 23000) {
+                $message = "you cant delete this category beacuse it is used in many products";
+            } else {
+                $message = $e->getMessage();
+            }
+            if($request->expectsJson()) {
+                return response()->json([
+                    'message' => $message,
+                ], 400);
+            }
+            return redirect()->back()->withInput()->withErrors([
+                'message' => $e->getMessage(),
+            ])->with('info', $message);
         });
     }
 }

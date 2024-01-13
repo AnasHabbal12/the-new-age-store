@@ -11,7 +11,7 @@ use App\Models\Product;
 
 class Category extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory;//, SoftDeletes;
 
     protected $fillable = ['name', 'parent_id', 'description', 'img', 'slug', 'status'];
 
@@ -31,10 +31,10 @@ class Category extends Model
 
     public function scopeFilter(Builder $builder, $filter) {
 
-        $builder->when($filter['name'] ?? false , function($builder, $value) { 
+        $builder->when($filter['name'] ?? false , function($builder, $value) {
             $builder-> where ('categories.name', 'LIKE', "%{$value}%");
         } );
-        $builder->when($filter['status'] ?? false , function($builder, $value) { 
+        $builder->when($filter['status'] ?? false , function($builder, $value) {
             $builder-> where ('categories.status', '=', "{$value}");
         } );
     //     if ($filter['name'] ?? false ) {
@@ -49,11 +49,11 @@ class Category extends Model
 
     public static function rules($id = 0) {
         return [
-            'name' => ['required', 
-            'string', 
-            'min:3', 
-            'max:254', 
-            "unique:categories,name,$id", 
+            'name' => ['required',
+            'string',
+            'min:3',
+            'max:254',
+            "unique:categories,name,$id",
             /*function($attribute, $value, $fails) {
                 if($value == 'laravel') {
                     $fails('this name is frorbidden!');

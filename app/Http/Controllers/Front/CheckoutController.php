@@ -11,12 +11,15 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\Intl\Countries;
 use App\Events\OrderCreated;
+use App\Exceptions\InvalidOrderException;
+use Throwable;
 
 class CheckoutController extends Controller
 {
     public function create(CartRepository $cart) {
 
         if ($cart->get()->count() == 0) {
+            throw new InvalidOrderException('Cart is Empty');
             return redirect()->route('home');
         }
         return view('front.checkout', [
@@ -44,9 +47,9 @@ class CheckoutController extends Controller
             foreach($items as $store_id => $cart_items) {
 
                 $order = Order::create([
-                'store_id' => $store_id, 
+                'store_id' => $store_id,
                 'user_id' => Auth::id(),
-                'payment_method' => 'cod', 
+                'payment_method' => 'cod',
                 'discount' => 0,
                 ]);
 
@@ -74,7 +77,7 @@ class CheckoutController extends Controller
             //event('order.created', $order);
             event(new OrderCreated ($order));
         }
-        catch (Trowable $e) {
+        catch (Throwable $e) {
             DB::rollback();
             throw $e;
     }

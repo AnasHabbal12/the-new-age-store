@@ -3,6 +3,7 @@
         <!-- Start Hero Area -->
         <section class="hero-area">
             <div class="container">
+                <x-alert type="info" />
                 <div class="row">
                     <div class="col-lg-8 col-12 custom-padding-right">
                         <div class="slider-head">
@@ -79,7 +80,7 @@
             </div>
         </section>
         <!-- End Hero Area -->
-    
+
         <!-- Start Featured Categories Area -->
         <section class="featured-categories section">
             <div class="container">
@@ -199,7 +200,7 @@
             </div>
         </section>
         <!-- End Features Area -->
-    
+
         <!-- Start Trending Product Area -->
         <section class="trending-product section">
             <div class="container">
@@ -220,7 +221,7 @@
             </div>
         </section>
         <!-- End Trending Product Area -->
-    
+
         <!-- Start Banner Area -->
         <section class="banner section">
             <div class="container">
@@ -253,7 +254,7 @@
             </div>
         </section>
         <!-- End Banner Area -->
-    
+
         <!-- Start Special Offer -->
         <section class="special-offer section">
             <div class="container">
@@ -427,7 +428,7 @@
             </div>
         </section>
         <!-- End Special Offer -->
-    
+
         <!-- Start Home Product List -->
         <section class="home-product-list section">
             <div class="container">
@@ -562,7 +563,7 @@
             </div>
         </section>
         <!-- End Home Product List -->
-    
+
         <!-- Start Brands Area -->
         <div class="brands">
             <div class="container">
@@ -602,7 +603,7 @@
             </div>
         </div>
         <!-- End Brands Area -->
-    
+
         <!-- Start Blog Section Area -->
         <section class="blog-section section">
             <div class="container">
@@ -687,7 +688,7 @@
             </div>
         </section>
         <!-- End Blog Section Area -->
-    
+
         <!-- Start Shipping Info -->
         <section class="shipping-info">
             <div class="container">
@@ -745,7 +746,7 @@
 <script src="{{asset('assets/js/glightbox.min.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
 <script type="text/javascript">
-    //========= Hero Slider 
+    //========= Hero Slider
     tns({
         container: '.hero-slider',
         slideBy: 'page',
